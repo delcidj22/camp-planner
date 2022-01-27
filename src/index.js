@@ -48,10 +48,7 @@ $(document).ready(function() {
   });
 });
 
-//data tab target links two together 
-//loop through the tabs and adding an event listener and show the target
-//data tab congit comtent, you going to loop thru, add classList of remove to remove the active 
-//21Attributes can be set and read by the camelCase name/key as an object property of the dataset: element.dataset.keyname
+
 const tabs = document.querySelectorAll('[data-tab-target]');
 const tabContents = document.querySelectorAll('[data-tab-content]');
 
@@ -69,12 +66,11 @@ tabs.forEach(tab => {
   });
 });
 
-//draggables
-//first grab all the things you can grab and containers is where you can drop elements
+
 const draggables = document.querySelectorAll('.draggable');
 const containers = document.querySelectorAll('.container');
 
-//loop through each draggable and add and EventListener.  1st you have to start it with dragstart event. add to class using .classList, add dragging. then stop ghost like effect by classlist.remove 
+
 draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', () => {
     draggable.classList.add('dragging');
@@ -84,8 +80,7 @@ draggables.forEach(draggable => {
     draggable.classList.remove('dragging');
   });
 });
-//looping through the container.  dragover will check if over something. then check to see what which container it is in.  draggable is the one you are draggin and it will add to the container 1 vs 2. e preventdefault is to drop it in the element/container 
-//if afterElements is not anything then goes on the bottom of the list 
+
 containers.forEach(container => {
   container.addEventListener('dragover', e => {
     console.log ('dragover'); 
@@ -99,9 +94,7 @@ containers.forEach(container => {
     }
   });
 });
-//this will put it in a certain position (not just containers). to get all of the draggable elements (container.querySelectorAll) but to return it into a array use the spread operator 
-//closest and  every one is a child of the container
-//offset (middle of the box) is the to figure out what it is closest to.  if less than zero it is above, if closest to offset and barely above element 
+
 function getDragAfterElement(container, y) {
   const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
 
@@ -118,19 +111,9 @@ function getDragAfterElement(container, y) {
 
 
 
-// ----------------------------Meal Service and Drink Service Logic ---------------------------- //
-
-// function clearFields(){
-//   $('#search').val("");
-//   $('#imageToShow').attr("");
-//   $('.showName').text("");
-//   $('.showCategory').text("");
-//   $('.showArea').text("");
-// }
-
 $('#mealSearch').click(function() {
   let search1 = $('#search1').val();
-  // clearFields();
+  
   let promise = MealService.getSearch(search1);
   promise.then(function(response){
     const body = JSON.parse(response);
@@ -143,7 +126,7 @@ $('#mealSearch').click(function() {
     $('.showCategory').text(mealCategory);
     let mealArea = body.meals[0].strArea;
     $('.showArea').text(mealArea);
-    // Ingredients
+    
     let mealIngredient1 = body.meals[0].strIngredient1;
     $('.showIngredient1').text(mealIngredient1);
     let mealIngredient2 = body.meals[0].strIngredient2;
@@ -184,7 +167,7 @@ $('#mealSearch').click(function() {
     $('.showIngredient19').text(mealIngredient19);
     let mealIngredient20 = body.meals[0].strIngredient20;
     $('.showIngredient20').text(mealIngredient20);
-    // Measurements strMeasure1
+    
     let mealMeasurement1 = body.meals[0].strMeasure1;
     $('.showMeasurement1').text(mealMeasurement1);
     let mealMeasurement2 = body.meals[0].strMeasure2;
@@ -225,16 +208,16 @@ $('#mealSearch').click(function() {
     $('.showMeasurement19').text(mealMeasurement19);
     let mealMeasurement20 = body.meals[0].strMeasure20;
     $('.showMeasurement20').text(mealMeasurement20);
-    // Instructions
+    
     let mealInstructions = body.meals[0].strInstructions;
     $('.showInstructions').text(mealInstructions);
-    // $('.footer').show();
+    
   });
 });
 
 $('#drinkSearch').click(function() {
   let search2 = $('#search2').val();
-  // clearFields();
+  
   let promise = DrinkService.getSearch(search2);
   promise.then(function(response){
     const body = JSON.parse(response);
@@ -243,7 +226,7 @@ $('#drinkSearch').click(function() {
     $('#drinkImageToShow').attr("src", drinkImage);
     let drinkName = body.drinks[0].strDrink;
     $('.showDrinkName').text(drinkName);
-    // Ingredients
+    
     let drinkIngredient1 = body.drinks[0].strIngredient1;
     $('.showDrinkIngredient1').text(drinkIngredient1);
     let drinkIngredient2 = body.drinks[0].strIngredient2;
@@ -256,7 +239,7 @@ $('#drinkSearch').click(function() {
     $('.showDrinkIngredient5').text(drinkIngredient5);
     let drinkIngredient6 = body.drinks[0].strIngredient6;
     $('.showDrinkIngredient6').text(drinkIngredient6);
-    // Measurements strMeasure1
+    
     let drinkMeasurement1 = body.drinks[0].strMeasure1;
     $('.showDrinkMeasurement1').text(drinkMeasurement1);
     let drinkMeasurement2 = body.drinks[0].strMeasure2;
@@ -269,11 +252,10 @@ $('#drinkSearch').click(function() {
     $('.showDrinkMeasurement5').text(drinkMeasurement5);
     let drinkMeasurement6 = body.drinks[0].strMeasure6;
     $('.showDrinkMeasurement6').text(drinkMeasurement6);
-    // Instructions
+    
     let drinkInstructions = body.drinks[0].strInstructions;
     $('.showDrinkInstructions').text(drinkInstructions);
-    // $('.footer').show();
+    
   });
 });
 
-// ----------------------------Meal Service and Drink Service Logic ---------------------------- //
